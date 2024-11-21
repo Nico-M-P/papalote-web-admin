@@ -1,0 +1,47 @@
+.login__container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.login__container h1 {
+    text-align: center;
+    font-size: 28px;
+}
+
+.login-logo__container {
+    max-height: 168px;
+}
+
+.login-logo__container img {
+    height: 100%;
+}
+
+input {
+    width: 300px;
+    height: 50px;
+    border: 1px solid #CDCBCF;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 0 12px;
+}
+
+.login-button__container {
+    margin: 14px;
+}
+
+.login-button__container button {
+    width: 100%;
+    max-width: 324px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #E0E994;
+    color:rgb(92,99,29);
+    font-size: 14px;
+}
+
+.login-forgotPassword__container a{
+    font-style: italic;
+    font-size: 12px;
+    color: rgb(92,99,29);
+}

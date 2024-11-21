@@ -1,0 +1,83 @@
+.eventlist__container {
+    width: 80%;
+    display: flex;
+    height: 100%;
+    margin-top: 70px; 
+    justify-self: center;
+}
+
+.evenlist-library__container {
+    width: 50%; 
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column; 
+    align-items: center
+}
+
+.evenlist-library-filter__container {
+    width: 70%; 
+    justify-content: space-around; 
+    display: flex; 
+    padding-top: 30px
+}
+
+.evenlist-library-filter__container button {
+    width: 150px; 
+    height: 50px; 
+    color: #000
+}
+
+.evenlist-library-card__container {
+    height: 600px; 
+    width: 450px; 
+    overflow-y: auto;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    border-radius: 8px; 
+    margin-top: 20px 
+}
+
+.cards__container {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center
+}
+
+.cards {
+    width: 350px; 
+    height: 75px; 
+    box-shadow: 0px 1px 3px #000; 
+    border-radius: 10px; 
+    margin: 5px 
+}
+
+.eventlist-editor__contanier {
+    height:100%; 
+    border: 1px solid #000
+}
+
+.event-editor-header__container {
+    text-align: center; 
+    width: 100%; 
+    padding-top: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.eventlist-editor-card__contanier {
+    width: 350px; 
+    height: 300px; 
+    box-shadow: 0px 2px 3px #000; 
+    border-radius: 10px; 
+    margin: 5px; 
+    justify-self: center; 
+    margin-top: 35px
+}
+
+.event-editor-addDate__container {
+    margin-top: 20px;
+}
+
+.event-editor-button__container {
+    margin-top: 20px;
+}

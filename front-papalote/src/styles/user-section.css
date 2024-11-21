@@ -1,0 +1,78 @@
+.user-section__body {
+    width: 100%; 
+    display: flex; 
+    justify-content: center;
+}
+
+.user-section__container {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: start;
+}
+
+
+.user-section__profile-picture {
+    position: relative; 
+    display: inline-block;
+    text-align: center;
+}
+
+.profile-picture {
+    border-radius: 100px; 
+    height: auto;
+}
+
+.edit-profile-picture__button {
+    position: absolute;
+    top: 85%;
+    left: 65%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    border-radius: 100px;
+    width: 45px;
+    height: 45px;
+    box-shadow: 1px 1px 3px black;
+}
+
+.edit-profile-picture__icon {
+    margin-left: -8px;
+}
+
+.profile-username__container {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.profile-username__container span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.profile-id__container span {
+    padding-left: 15px;
+}
+
+.logout__container {
+    padding-top: 25px;
+}
+
+.logout__container button {
+    width: 100%;
+    max-width: 324px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #E0E994;
+    color:rgb(92,99,29);
+    font-size: 14px;
+    box-shadow: 1px 1px 3px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout__container img {
+    width: 20px;
+    height: 20px;
+}

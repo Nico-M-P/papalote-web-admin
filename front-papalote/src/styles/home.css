@@ -1,0 +1,17 @@
+
+
+header {
+    position: absolute; 
+    display: flex;
+    width: 100%;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px;
+}
