@@ -49,7 +49,8 @@ const EventList = ({ events, setSelectedEvent }) => {
             description: '',
             zone: '',
             date: '',
-            image: ''
+            image: '',
+            qr: ''
         });
         setMessage('');
     };
@@ -58,16 +59,23 @@ const EventList = ({ events, setSelectedEvent }) => {
         console.log('handleSave called');
         if (tempItem) {
             try {
+                const itemToSave = { ...tempItem };
+                if (activeSection === 'eventos') {
+                    delete itemToSave.qr; // Remove qr for events
+                } else {
+                    delete itemToSave.date; // Remove date for activities
+                }
+
                 if (tempItem.id) {
                     console.log('Updating document with id:', tempItem.id);
                     const itemRef = doc(firestore, activeSection === 'eventos' ? 'events' : 'activities', tempItem.id);
-                    await updateDoc(itemRef, tempItem);
+                    await updateDoc(itemRef, itemToSave);
                     setMessage('Guardado con éxito');
                     console.log('Document updated successfully');
                 } else {
                     console.log('Creating new document');
                     const collectionRef = collection(firestore, activeSection === 'eventos' ? 'events' : 'activities');
-                    const docRef = await addDoc(collectionRef, tempItem);
+                    const docRef = await addDoc(collectionRef, itemToSave);
                     const newItem = { ...tempItem, id: docRef.id };
                     setTempItem(newItem);
                     setMessage('Creado con éxito');
@@ -187,27 +195,44 @@ const EventList = ({ events, setSelectedEvent }) => {
                                 <input placeholder='Zona' value={tempItem.zone} onChange={(e) => setTempItem({ ...tempItem, zone: e.target.value })} />
                                 <p>Zona</p>
                             </div>
-                            <div onClick={handleImageClick} className='input__img' >
-                                <img src={tempItem.image} alt="Selected"/>
+                            <div className='input__img'>
+                                <input
+                                    type="text"
+                                    placeholder='URL de la imagen'
+                                    value={tempItem.image}
+                                    onChange={(e) => setTempItem({ ...tempItem, image: e.target.value })}
+                                />
+                                {tempItem.image && (
+                                    <img src={tempItem.image} alt="Vista previa" className="image-preview" />
+                                )}
                             </div>
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                style={{ display: 'none' }}
-                                onChange={handleImageChange}
-                            />
                             <div className='input__name'>
                                 <input placeholder='Nombre' value={tempItem.name} onChange={(e) => setTempItem({ ...tempItem, name: e.target.value })} />
                             </div>
                             <div className='input__description'>
                                 <textarea placeholder='Descripción' value={tempItem.description} onChange={(e) => setTempItem({ ...tempItem, description: e.target.value })} />
                             </div>
+                            {activeSection === 'eventos' && (
+                                <div className='event-editor-addDate__container'>
+                                    <input
+                                        placeholder='20/12/2024'
+                                        value={tempItem.date}
+                                        onChange={(e) => setTempItem({ ...tempItem, date: e.target.value })}
+                                    />
+                                </div>
+                            )}
+                            {activeSection === 'actividades' && (
+                                <div className='activity-editor-addQR__container'>
+                                    <input
+                                        type="text"
+                                        placeholder='URL del QR'
+                                        value={tempItem.qr}
+                                        onChange={(e) => setTempItem({ ...tempItem, qr: e.target.value })}
+                                    />
+                                </div>
+                            )}
                         </>
                     )}
-                </div>
-                <div className='event-editor-addDate__container'>
-                    <input placeholder='20/12/2024'>
-                    </input>
                 </div>
                 <div className='event-editor-button__container'>
                     <button onClick={handleSave}>

@@ -133,11 +133,17 @@
 }
 
 .event-editor-addDate__container {
-    margin-top: 20px;
+    margin-top: 35px;
+    border: 1px solid #000;
+}
+
+.activity-editor-addQR__container {
+    margin-top: 35px;
+    border: 1px solid #000;
 }
 
 .event-editor-button__container {
-    margin-top: 20px;
+    margin-top: 70px;
 }
 
 .card__input {
@@ -161,6 +167,10 @@
     padding: 10px 0 5px 0;
     width: auto;
     padding-left: 70px;
+}
+
+.event-editor-addDate__container input {
+    color: #000;
 }
 
 .input__zone p{
