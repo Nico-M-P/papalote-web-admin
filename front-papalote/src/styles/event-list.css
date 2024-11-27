@@ -130,6 +130,7 @@
     color: #000;
     border: none;
     outline: none;
+    height: 16px;
 }
 
 .event-editor-addDate__container {
@@ -196,6 +197,24 @@
 .input__name {
     width: 100%;
     height: 25px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 10px 0 0 0;
+}
+
+.input__text input {
+    font-size: 16px;
+    font-weight: bold;
+    height: 10px;
+    padding: 10px 0 5px 0;
+    padding-left: 15px;
+    width: auto;
+}
+
+.input__text {
+    width: 100%;
+    height: 15px;
     display: flex;
     flex-direction: column;
     background-color: #fff;
