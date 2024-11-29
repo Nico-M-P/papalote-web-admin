@@ -130,20 +130,15 @@
     color: #000;
     border: none;
     outline: none;
+    height: 16px;
 }
 
 .event-editor-addDate__container {
-    margin-top: 35px;
-    border: 1px solid #000;
-}
-
-.activity-editor-addQR__container {
-    margin-top: 35px;
-    border: 1px solid #000;
+    margin-top: 20px;
 }
 
 .event-editor-button__container {
-    margin-top: 70px;
+    margin-top: 20px;
 }
 
 .card__input {
@@ -167,10 +162,6 @@
     padding: 10px 0 5px 0;
     width: auto;
     padding-left: 70px;
-}
-
-.event-editor-addDate__container input {
-    color: #000;
 }
 
 .input__zone p{
@@ -206,6 +197,24 @@
 .input__name {
     width: 100%;
     height: 25px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 10px 0 0 0;
+}
+
+.input__text input {
+    font-size: 16px;
+    font-weight: bold;
+    height: 10px;
+    padding: 10px 0 5px 0;
+    padding-left: 15px;
+    width: auto;
+}
+
+.input__text {
+    width: 100%;
+    height: 15px;
     display: flex;
     flex-direction: column;
     background-color: #fff;

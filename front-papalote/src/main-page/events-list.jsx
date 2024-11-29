@@ -49,8 +49,7 @@ const EventList = ({ events, setSelectedEvent }) => {
             description: '',
             zone: '',
             date: '',
-            image: '',
-            qr: ''
+            image: ''
         });
         setMessage('');
     };
@@ -59,23 +58,17 @@ const EventList = ({ events, setSelectedEvent }) => {
         console.log('handleSave called');
         if (tempItem) {
             try {
-                const itemToSave = { ...tempItem };
-                if (activeSection === 'eventos') {
-                    delete itemToSave.qr; // Remove qr for events
-                } else {
-                    delete itemToSave.date; // Remove date for activities
-                }
-
                 if (tempItem.id) {
                     console.log('Updating document with id:', tempItem.id);
                     const itemRef = doc(firestore, activeSection === 'eventos' ? 'events' : 'activities', tempItem.id);
-                    await updateDoc(itemRef, itemToSave);
+                    const { id, ...updatedItem } = tempItem;
+                    await updateDoc(itemRef, updatedItem);
                     setMessage('Guardado con éxito');
                     console.log('Document updated successfully');
                 } else {
                     console.log('Creating new document');
                     const collectionRef = collection(firestore, activeSection === 'eventos' ? 'events' : 'activities');
-                    const docRef = await addDoc(collectionRef, itemToSave);
+                    const docRef = await addDoc(collectionRef, tempItem);
                     const newItem = { ...tempItem, id: docRef.id };
                     setTempItem(newItem);
                     setMessage('Creado con éxito');
@@ -190,55 +183,46 @@ const EventList = ({ events, setSelectedEvent }) => {
                 </div>
                 <div className='eventlist-editor-card__contanier'>
                     {tempItem && (
-                        <>
-                            <div className='input__zone'>
-                                <input placeholder='Zona' value={tempItem.zone} onChange={(e) => setTempItem({ ...tempItem, zone: e.target.value })} />
-                                <p>Zona</p>
+                        <div style={{paddingTop: "16px"}}>    
+                            <div>
+                                <p style={{fontWeight: "bold", margin: 0, textAlign: "left", padding: "0px 16px 0px 16px"}}>Nombre:</p>
+                                <input placeholder='ej. Hacer arte...' value={tempItem.name} onChange={(e) => setTempItem({ ...tempItem, name: e.target.value })} />
                             </div>
-                            <div className='input__img'>
-                                <input
-                                    type="text"
-                                    placeholder='URL de la imagen'
-                                    value={tempItem.image}
-                                    onChange={(e) => setTempItem({ ...tempItem, image: e.target.value })}
-                                />
-                                {tempItem.image && (
-                                    <img src={tempItem.image} alt="Vista previa" className="image-preview" />
-                                )}
+                            <div>
+                                <p style={{fontWeight: "bold", margin: 0, textAlign: "left", padding: "0px 16px 0px 16px"}}>Descripción corta:</p>
+                                <input  placeholder='ej. Haz arte junto con tu familia...' value={tempItem.description} onChange={(e) => setTempItem({ ...tempItem, description: e.target.value })} />
                             </div>
-                            <div className='input__name'>
-                                <input placeholder='Nombre' value={tempItem.name} onChange={(e) => setTempItem({ ...tempItem, name: e.target.value })} />
+                            <div>
+                                <p style={{fontWeight: "bold", margin: 0, textAlign: "left", padding: "0px 16px 0px 16px"}}>Zona:</p>
+                                <input placeholder='ej. Comprendo, Soy, Pequeños...' value={tempItem.zone} onChange={(e) => setTempItem({ ...tempItem, zone: e.target.value })} />
                             </div>
-                            <div className='input__description'>
-                                <textarea placeholder='Descripción' value={tempItem.description} onChange={(e) => setTempItem({ ...tempItem, description: e.target.value })} />
-                            </div>
-                            {activeSection === 'eventos' && (
-                                <div className='event-editor-addDate__container'>
-                                    <input
-                                        placeholder='20/12/2024'
-                                        value={tempItem.date}
-                                        onChange={(e) => setTempItem({ ...tempItem, date: e.target.value })}
-                                    />
+
+                            { activeSection == 'eventos' &&
+                                <div>
+                                    <p style={{fontWeight: "bold", margin: 0, textAlign: "left", padding: "0px 16px 0px 16px"}}>Fecha:</p>
+                                    <input placeholder='ej. martes 12 enero 2024...' value={tempItem.date} onChange={(e) => setTempItem({ ...tempItem, date: e.target.value })} />
                                 </div>
-                            )}
-                            {activeSection === 'actividades' && (
-                                <div className='activity-editor-addQR__container'>
-                                    <input
-                                        type="text"
-                                        placeholder='URL del QR'
-                                        value={tempItem.qr}
-                                        onChange={(e) => setTempItem({ ...tempItem, qr: e.target.value })}
-                                    />
+                            }
+                            <div>
+                                <p style={{fontWeight: "bold", margin: 0, textAlign: "left", padding: "0px 16px 0px 16px"}}>Url de imagen:</p>
+                                <input placeholder='ej. https://imagen.com' value={tempItem.image} onChange={(e) => setTempItem({ ...tempItem, image: e.target.value })} />
+                            </div>
+
+
+                            { activeSection === 'actividades' &&
+                                <div>
+                                    <p style={{fontWeight: "bold", margin: 0, textAlign: "left", padding: "0px 16px 0px 16px"}}>Url de QR:</p>
+                                    <input placeholder='ej. https://qr-code.com' value={tempItem.qr} onChange={(e) => setTempItem({ ...tempItem, qr: e.target.value })} />
                                 </div>
-                            )}
-                        </>
+                            }    
+                        </div>
                     )}
                 </div>
                 <div className='event-editor-button__container'>
-                    <button onClick={handleSave}>
+                    <button onClick={handleSave} style={{marginRight: "1rem"}}>
                         Guardar
                     </button>
-                    <button onClick={handleCreate}>
+                    <button onClick={handleCreate} style={{marginLeft: "1rem"}}>
                         Crear Nuevo
                     </button>
                 </div>
